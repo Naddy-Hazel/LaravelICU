@@ -9,7 +9,8 @@ class FeedController extends Controller
 {
     public function index(){
 
-        return view('pages.feed.index');
+        $feeds = Feed::paginate(5);
+        return view('pages.feed.index', compact('feeds'));
 
     }
 
@@ -34,6 +35,26 @@ class FeedController extends Controller
 
     }
 
+    public function store(Request $request){
+        
+        //Gate:authorize('update', $feed)
+        $validated_request = $request->validate([
+                'title' =>'required | string | max:100 | min:3',
+                'description'=> 'required | string | max:300',
+        ]);
+
+        //add a user id to the $validated_request
+        $validated_request['user_id'] = 1;
+
+        // ORM
+        // $feed->create($validated_request);
+        Feed::create($validated_request);
+        return redirect()->route('feeds')->with('success','Feed created successfully!');
+
+        // $feed->update($this->validateRequest($request));
+        //return redirect()->route('feeds')->with('success','Feed created successfully!');
+
+    }
     public function update(Request $request,Feed $feed){
         
         //Gate:authorize('update', $feed)
