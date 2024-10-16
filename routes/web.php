@@ -34,11 +34,11 @@ Route::get('/auth/signin', function () {
 });
 
 
-
 //Name Route
 Route::get('/user/profile', function () {
     return 'Pengguna Profile';
 } ) ->name('user.profile');
+
 //Route Param
 Route::get('/user/{name}', function ($name) {
     return 'Nama saya '.$name;
@@ -72,3 +72,7 @@ Route::name('job')->prefix('job')->group (function(){
         return 'Job details are following';
     })->name('.description');
 });
+
+
+//supaya web.php dalam route/feed/web.php blh dibaca
+require __DIR__.'/feed/web.php';
