@@ -1,0 +1,15 @@
+POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCYNOwoU5bi_RLl2Qq515VHaNXGRqo9-iM HTTP/1.1
+content-type: application/json
+
+{
+    "contents":[
+        {
+            "parts":[
+                {
+                    "text":"Resepi Nasi Ayam"
+                }
+            ]
+        }
+    ]
+    
+}

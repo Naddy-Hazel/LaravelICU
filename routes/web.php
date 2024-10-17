@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AIController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -89,5 +90,5 @@ Route::middleware('guest')->group(function () {
     Route::post('/auth/authenticate', [AuthController::class,'authenticate'])->name('auth.authenticate');
 });
 
-//Route::get('/ai/feed', [AIController::class,'generateFeedContent'])->name('ai.feed');
+Route::get('/ai/feed', [AIController::class,'generateAiPage'])->name('ai.feed');
 Route::get('/auth/signout', [AuthController::class,'signOut'])->name('auth.signout');
