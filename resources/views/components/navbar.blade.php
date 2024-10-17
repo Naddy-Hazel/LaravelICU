@@ -22,7 +22,12 @@
               <li class="nav-item">
                 <a class="nav-link" href={{route('about')}}>About</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{route('auth.signout')}}>Sign Out</a>
+              </li>
+
             </ul>
+            
           </div>
         </div>
       </nav>

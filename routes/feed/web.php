@@ -16,3 +16,5 @@ Route::put('/feed/upadte/{feed}', action: [FeedController::class,'update'])->nam
 
 //Route Feed Show
 Route::get('/feed/show/{feed}', action: [FeedController::class,'show'])->name('feed.show');
+
+

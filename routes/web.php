@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,3 +81,6 @@ require __DIR__.'/feed/web.php';
 
 Route::get('/auth/signup', [AuthController::class,'signUp'])->name('auth.signup');
 Route::get('/auth/signin', [AuthController::class,'signIn'])->name('auth.signin');
+Route::post('/auth/store', [AuthController::class,'storeUser'])->name('auth.store');
+Route::post('/auth/authenticate', [AuthController::class,'authenticate'])->name('auth.authenticate');
+Route::get('/auth/signout', [AuthController::class,'signOut'])->name('auth.signout');
