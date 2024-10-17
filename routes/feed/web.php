@@ -4,7 +4,7 @@ use App\Http\Controllers\FeedController;
 use Illuminate\Support\Facades\Route;
 
 //middleware yg membenarkan org dah login (auth) shj utk masuk ke dlm group ni
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','log-request'])->group(function () {
     //Route Feeds
     Route::get('/feeds', action: [FeedController::class,'index'])->name('feeds');
 

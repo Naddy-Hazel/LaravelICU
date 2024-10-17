@@ -4,7 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class LogMiddleware
@@ -14,9 +15,12 @@ class LogMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        Log::info('Request URL: '.$request->fullUrl());
+        $user = Auth::user();
+        Log::info('User ID: '.$user->id.'| Name: '.$user->name .'access to URL: '.$request->fullUrl());
+
+        //Log::info('Request URL: '.$request->fullUrl());
         return $next($request);
     }
 }

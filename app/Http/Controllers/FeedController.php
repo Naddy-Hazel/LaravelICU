@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Feed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 
 class FeedController extends Controller
@@ -11,29 +13,25 @@ class FeedController extends Controller
 
         $feeds = Feed::paginate(5);
         return view('pages.feed.index', compact('feeds'));
-
     }
+
+    public function show(Feed $feed){
+
+        Gate::authorize('update', $feed);
+        return view('pages.feed.show', compact('feed'));
+    }
+
 
     public function create(){
 
         return view('pages.feed.create');
-
     }
 
     public function edit(){
 
         return view('pages.feed.edit');
-
     }
 
-    public function show(Feed $feed){
-        
-        //dd($feed);
-        Log::debug("Show feed", ["feed"=> $feed]);
-        //return, 'This is feed List'
-        return view('pages.feed.show',compact('feed'));
-
-    }
 
     public function store(Request $request){
         
@@ -44,7 +42,8 @@ class FeedController extends Controller
         ]);
 
         //add a user id to the $validated_request
-        $validated_request['user_id'] = 1;
+        $user = Auth::user();
+        $validated_request['user_id'] = $user->id;
 
         // ORM
         // $feed->create($validated_request);
