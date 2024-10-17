@@ -79,8 +79,15 @@ Route::name('job')->prefix('job')->group (function(){
 //supaya web.php dalam route/feed/web.php blh dibaca
 require __DIR__.'/feed/web.php';
 
-Route::get('/auth/signup', [AuthController::class,'signUp'])->name('auth.signup');
-Route::get('/auth/signin', [AuthController::class,'signIn'])->name('auth.signin');
-Route::post('/auth/store', [AuthController::class,'storeUser'])->name('auth.store');
-Route::post('/auth/authenticate', [AuthController::class,'authenticate'])->name('auth.authenticate');
+//middleware yg membenarkan org tak login (guest) shj utk masuk ke dlm group ni
+Route::middleware('guest')->group(function () {
+
+    Route::get('/auth/signup', [AuthController::class,'signUp'])->name('auth.signup');
+    Route::get('/auth/signin', [AuthController::class,'signIn'])->name('auth.signin');
+
+    Route::post('/auth/store', [AuthController::class,'storeUser'])->name('auth.store');
+    Route::post('/auth/authenticate', [AuthController::class,'authenticate'])->name('auth.authenticate');
+});
+
+//Route::get('/ai/feed', [AIController::class,'generateFeedContent'])->name('ai.feed');
 Route::get('/auth/signout', [AuthController::class,'signOut'])->name('auth.signout');

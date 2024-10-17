@@ -22,12 +22,26 @@
               <li class="nav-item">
                 <a class="nav-link" href={{route('about')}}>About</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href={{route('auth.signout')}}>Sign Out</a>
-              </li>
+            </ul>    
 
-            </ul>
-            
+            {{-- Sign out button at the far right --}}
+            <ul class="navbar-nav ms-auto">
+              {{-- Only autherize user can see / sudah berjaya login --}}
+              @auth
+                  <li class="nav-item">
+                    <a class="nav-link"  href={{route('auth.signout')}}>Sign Out</a>
+                  </li>
+              @endauth
+              @guest
+              {{-- Only guest user can see / belum berjaya login --}}
+                  <li class="nav-item">
+                    <a class="nav-link"  href={{route('auth.signin')}}>Sign In</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link"  href={{route('auth.signup')}}>Sign Up</a>
+                  </li>
+              @endguest
+            </ul> 
           </div>
         </div>
       </nav>
